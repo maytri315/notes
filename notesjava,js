@@ -1,0 +1,93 @@
+function saveNote() {
+    const noteInput = document.getElementById('noteInput').value;
+    const editIndex = document.getElementById('editIndex').value;
+
+    let notes = getNotesFromLocalStorage();
+    
+    if (editIndex === "") {
+        if (noteInput.trim() !== "") {
+            notes.push(noteInput);
+        } else {
+            alert("Please enter a note.");
+        }
+    } else {
+        if (noteInput.trim() === "") {
+            // Remove the note if the edited input is empty
+            notes.splice(editIndex, 1);
+        } else {
+            notes[editIndex] = noteInput;
+        }
+    }
+
+    localStorage.setItem('notes', JSON.stringify(notes));
+    displayNotes();
+    document.getElementById('noteInput').value = '';
+    document.getElementById('editIndex').value = '';
+}
+
+function getNotesFromLocalStorage() {
+    const notes = localStorage.getItem('notes');
+    return notes ? JSON.parse(notes) : [];
+}
+
+function displayNotes() {
+    const notesContainer = document.getElementById('notes');
+    notesContainer.innerHTML = '';
+    const notes = getNotesFromLocalStorage();
+    notes.forEach((note, index) => {
+        const noteElement = document.createElement('div');
+        noteElement.className = 'note';
+        noteElement.textContent = note;
+        noteElement.onclick = function () {
+            openPopup(note, index);
+        };
+        
+        const editButton = document.createElement('button');
+        editButton.className = 'edit-button';
+        editButton.textContent = 'Edit';
+        editButton.onclick = function (event) {
+            event.stopPropagation();
+            editNote(index);
+        };
+        
+        noteElement.appendChild(editButton);
+        notesContainer.appendChild(noteElement);
+    });
+}
+
+function searchNotes() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const notes = document.querySelectorAll('.note');
+    notes.forEach(note => {
+        const noteText = note.textContent.toLowerCase();
+        if (noteText.includes(searchInput)) {
+            note.style.display = 'block';
+        } else {
+            note.style.display = 'none';
+        }
+    });
+}
+
+function openPopup(noteText, index) {
+    document.getElementById('popupText').textContent = noteText;
+    document.getElementById('notePopup').style.display = 'flex';
+    document.getElementById('mainContainer').style.filter = 'blur(5px)';
+    document.getElementById('editIndex').value = index;
+}
+
+function closePopup() {
+    document.getElementById('notePopup').style.display = 'none';
+    document.getElementById('mainContainer').style.filter = 'none';
+    document.getElementById('editIndex').value = ''; // Clear edit index when popup is closed
+}
+
+function editNote(index) {
+    const notes = getNotesFromLocalStorage();
+    const note = notes[index];
+    document.getElementById('noteInput').value = note;
+    document.getElementById('editIndex').value = index;
+}
+
+window.onload = function () {
+    displayNotes();
+};
