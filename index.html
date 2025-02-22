@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="notescss.css">
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1>Notes</h1>
+        <input type="text" id="searchInput" placeholder="Search notes...">
+        <button onclick="searchNotes()">Search</button>
+        <textarea id="noteInput" placeholder="Type your notes here..."></textarea>
+        <input type="hidden" id="editIndex" value="">
+        <button onclick="saveNote()">Save Note</button>
+        <div id="notes"></div>
+    </div>
+    
+    <div id="notePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <p id="popupText"></p>
+        </div>
+    </div>
+    
+    <script src="notesjava.js"></script>
+</body>
+</html>
