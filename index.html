@@ -5,21 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
     <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #FFFAF0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #FF69B4;
+            text-shadow: 2px 2px #FFA07A;
+        }
+        #noteInput, button {
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        #noteInput {
+            width: 90%;
+            border: 2px solid #FF69B4;
+        }
+        button {
+            cursor: pointer;
+            background-color: #FFB6C1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+        }
+        button:hover {
+            background-color: #FF69B4;
+        }
         .note {
-            border: 1px solid #ccc;
+            background-color: #FFF0F5;
+            border: 2px dashed #FF69B4;
             padding: 10px;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 90%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
         }
         .edit-button {
             margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #FFB6C1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .edit-button:hover {
+            background-color: #FF69B4;
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            #noteInput, button, .note {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Notes</h1>
+    <h1>Notes 📝</h1>
     <input type="text" id="noteInput" placeholder="Enter your note here">
     <input type="hidden" id="editIndex">
     <button onclick="saveNote()">Save Note</button>
