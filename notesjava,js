@@ -2,6 +2,7 @@ function saveNote() {
     const noteInput = document.getElementById('noteInput').value;
     const editIndex = document.getElementById('editIndex').value;
     let notes = getNotesFromLocalStorage();
+    console.log("Saving note: ", noteInput); // Log note input
     if (editIndex === "") {
         if (noteInput.trim() !== "") {
             notes.push(noteInput);
@@ -16,6 +17,7 @@ function saveNote() {
             notes[editIndex] = noteInput;
         }
     }
+    console.log("Notes array: ", notes); // Log notes array
     localStorage.setItem('notes', JSON.stringify(notes));
     displayNotes();
     document.getElementById('noteInput').value = '';
@@ -24,6 +26,7 @@ function saveNote() {
 
 function getNotesFromLocalStorage() {
     const notes = localStorage.getItem('notes');
+    console.log("Retrieved notes: ", notes); // Log retrieved notes
     return notes ? JSON.parse(notes) : [];
 }
 
