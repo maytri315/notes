@@ -53,39 +53,6 @@ function displayNotes() {
     });
 }
 
-function searchNotes() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const notes = document.querySelectorAll('.note');
-    notes.forEach(note => {
-        const noteText = note.textContent.toLowerCase();
-        if (noteText.includes(searchInput)) {
-            note.style.display = 'block';
-        } else {
-            note.style.display = 'none';
-        }
-    });
-}
-
-function openPopup(noteText, index) {
-    document.getElementById('popupText').textContent = noteText;
-    document.getElementById('notePopup').style.display = 'flex';
-    document.getElementById('mainContainer').style.filter = 'blur(5px)';
-    document.getElementById('editIndex').value = index;
-}
-
-function closePopup() {
-    document.getElementById('notePopup').style.display = 'none';
-    document.getElementById('mainContainer').style.filter = 'none';
-    document.getElementById('editIndex').value = ''; // Clear edit index when popup is closed
-}
-
-function editNote(index) {
-    const notes = getNotesFromLocalStorage();
-    const note = notes[index];
-    document.getElementById('noteInput').value = note;
-    document.getElementById('editIndex').value = index;
-}
-
 window.onload = function () {
     displayNotes();
 };
