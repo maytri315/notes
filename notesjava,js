@@ -2,10 +2,12 @@ function saveNote() {
     const noteInput = document.getElementById('noteInput').value;
     const editIndex = document.getElementById('editIndex').value;
     let notes = getNotesFromLocalStorage();
+
     console.log("Saving note: ", noteInput); // Log note input
+
     if (editIndex === "") {
         if (noteInput.trim() !== "") {
-            notes.push(noteInput);
+            notes.push(noteInput); // Add new note
         } else {
             alert("Please enter a note.");
         }
@@ -14,14 +16,16 @@ function saveNote() {
             // Remove the note if the edited input is empty
             notes.splice(editIndex, 1);
         } else {
-            notes[editIndex] = noteInput;
+            notes[editIndex] = noteInput; // Update existing note
         }
     }
+
     console.log("Notes array: ", notes); // Log notes array
-    localStorage.setItem('notes', JSON.stringify(notes));
-    displayNotes();
-    document.getElementById('noteInput').value = '';
-    document.getElementById('editIndex').value = '';
+
+    localStorage.setItem('notes', JSON.stringify(notes)); // Save notes to localStorage
+    displayNotes(); // Update the UI with new notes
+    document.getElementById('noteInput').value = ''; // Clear input field
+    document.getElementById('editIndex').value = ''; // Clear edit index
 }
 
 function getNotesFromLocalStorage() {
@@ -34,13 +38,12 @@ function displayNotes() {
     const notesContainer = document.getElementById('notes');
     notesContainer.innerHTML = '';
     const notes = getNotesFromLocalStorage();
+
     notes.forEach((note, index) => {
         const noteElement = document.createElement('div');
         noteElement.className = 'note';
         noteElement.textContent = note;
-        noteElement.onclick = function () {
-            openPopup(note, index);
-        };
+
         const editButton = document.createElement('button');
         editButton.className = 'edit-button';
         editButton.textContent = 'Edit';
@@ -48,9 +51,17 @@ function displayNotes() {
             event.stopPropagation();
             editNote(index);
         };
+
         noteElement.appendChild(editButton);
         notesContainer.appendChild(noteElement);
     });
+}
+
+function editNote(index) {
+    const notes = getNotesFromLocalStorage();
+    const note = notes[index];
+    document.getElementById('noteInput').value = note;
+    document.getElementById('editIndex').value = index;
 }
 
 window.onload = function () {
