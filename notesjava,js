@@ -1,9 +1,7 @@
 function saveNote() {
     const noteInput = document.getElementById('noteInput').value;
     const editIndex = document.getElementById('editIndex').value;
-
     let notes = getNotesFromLocalStorage();
-    
     if (editIndex === "") {
         if (noteInput.trim() !== "") {
             notes.push(noteInput);
@@ -18,7 +16,6 @@ function saveNote() {
             notes[editIndex] = noteInput;
         }
     }
-
     localStorage.setItem('notes', JSON.stringify(notes));
     displayNotes();
     document.getElementById('noteInput').value = '';
@@ -41,7 +38,6 @@ function displayNotes() {
         noteElement.onclick = function () {
             openPopup(note, index);
         };
-        
         const editButton = document.createElement('button');
         editButton.className = 'edit-button';
         editButton.textContent = 'Edit';
@@ -49,7 +45,6 @@ function displayNotes() {
             event.stopPropagation();
             editNote(index);
         };
-        
         noteElement.appendChild(editButton);
         notesContainer.appendChild(noteElement);
     });
