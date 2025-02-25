@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    display: flex;
+    display: flex;  
     justify-content: center;
     align-items: center;
 }
@@ -47,6 +47,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    
 }
 
 button:hover {
@@ -86,6 +87,7 @@ button:hover {
     cursor: pointer;
     font-size: 0.8em; /* Smaller font size */
     margin-left: 300px; /* Add some space between the button and the note text */
+    width: 100px;
 }
 
 .edit-button:hover {
