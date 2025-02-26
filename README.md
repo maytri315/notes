@@ -44,9 +44,3 @@ To run this app locally, follow these steps:
 1. Clear the text from the input field.
 2. Click the "Save Note" button to remove the note.
 
-## Screenshots
-![Notes App - Desktop View](https://via.placeholder.com/600x400)  
-_Desktop view showcasing the cutesy user interface._
-
-![Notes App - Mobile View](https://via.placeholder.com/300x500)  
-_Mobile view ensuring the app is phone-friendly._
